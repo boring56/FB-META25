@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" >
+  <link rel="stylesheet" href="fm.css?ver=20251017">
+  <title>FM富馬好康報</title>
+</head>
+<body>
+  <div class="wrap">
+    <div class="block_one fade">
+      <img class="center" src="./assets/block1_center.png" alt="">
+      <img class="bg" src="./assets/block1_bg.jpg" alt="">
+    </div>
+    <div class="block_two fade">
+      <div class="block2">
+        <img class="img1 fade" src="./assets/block2_1.png" alt="">
+        <img class="img2 fade" src="./assets/block2_2.png" alt="">
+        <img class="img3 fade" src="./assets/block2_3.png" alt="">
+        <img class="img4 fade" src="./assets/block2_4.png" alt="">
+      </div>
+      <img class="bg" src="./assets/block2_bg.jpg" alt="">
+    </div>
+    <div class="block_three fade">
+      <img class="center " src="./assets/block3_center.png" alt="">
+      <img class="bg" src="./assets/block3_bg.jpg" alt="">
+    </div>
+  </div>
+  <footer>
+    <div class="btn_368">
+      <img class="btn" src="./assets/btn_368.png" alt="">
+      <img class="hover" src="./assets/btn_368_hover.png" alt="">
+    </div>
+    <div class="btn_line">
+      <img class="btn" src="./assets/btn_line.png" alt="">
+      <img class="hover" src="./assets/btn_line_hover.png" alt="">
+    </div>
+  </footer>
+  <script>
+    // 👇 你可以在這裡調整觸發條件
+    const options = {
+      // 當元素有至少 15% 面積進入 viewport 時觸發
+      threshold: 0.15,
+      // 提早或延後觸發（下方收窄 10% 可稍早淡入）
+      rootMargin: "0px 0px -10% 0px"
+    };
+
+    const io = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        const el = entry.target;
+
+        if (entry.isIntersecting) {
+          // 進入視窗 → 顯示
+          el.classList.add('show');
+
+          // 若只想淡入一次，之後就不觀察了
+          if (el.hasAttribute('data-once')) {
+            observer.unobserve(el);
+          }
+        } else {
+          // 離開視窗 → 隱藏（有 data-once 的元素不會走到這裡，因為已 unobserve）
+          el.classList.remove('show');
+        }
+      });
+    }, options);
+
+    // 啟動觀察
+    document.querySelectorAll('.fade').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
